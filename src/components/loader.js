@@ -268,15 +268,15 @@ const Loader = ({ onLoaderLoaded }) => {
 
         // chub data
         const urlsBatch1 = [
-          { url: "https://drivershub.charlws.com/api/member/list", auth: false },
-          { url: "https://drivershub.charlws.com/api/sponsor/list", auth: false },
+          { url: "https://admin.chub.page/api/member/list", auth: false },
+          { url: "https://admin.chub.page/api/sponsor/list", auth: false },
           { url: `${apiPath}/client/config/user`, auth: false },
         ];
 
         const [specialRoles, patrons, userConfig] = await makeRequestsAuto(urlsBatch1);
 
         const specialUsers = {};
-        if (specialRoles) {
+        if (specialRoles && specialRoles?.lead_developer) {
           setSpecialRoles(specialRoles);
           let roleNames = Object.keys(specialRoles);
           for (let i = 0; i < roleNames.length; i++) {
@@ -289,7 +289,7 @@ const Loader = ({ onLoaderLoaded }) => {
           }
           setSpecialUsers(specialUsers);
         }
-        if (patrons) {
+        if (patrons && patrons?.platinum) {
           setPatrons(patrons);
         }
         if (userConfig) {

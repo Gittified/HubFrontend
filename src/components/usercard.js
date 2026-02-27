@@ -350,7 +350,7 @@ const UserCard = props => {
       window.loading += 1;
 
       const [_tmp, _chart, _overall, _details, _point, _dlogList] = await makeRequestsAuto([
-        { url: `https://drivershub.charlws.com/api/truckersmp/${user.truckersmpid}`, auth: false },
+        { url: `https://admin.chub.page/api/truckersmp/${user.truckersmpid}`, auth: false },
         { url: `${apiPath}/dlog/statistics/chart?userid=${user.userid}&ranges=7&interval=86400&sum_up=false&before=` + getTodayUTC() / 1000, auth: "prefer" },
         { url: `${apiPath}/dlog/statistics/summary?userid=${user.userid}`, auth: "prefer" },
         { url: `${apiPath}/dlog/statistics/details?userid=${user.userid}`, auth: "prefer" },
@@ -498,6 +498,7 @@ const UserCard = props => {
     let tiers = ["platinum", "gold", "silver", "bronze"];
     for (let i = 0; i < tiers.length; i++) {
       if (userLevel !== 0) break;
+      if (!Object.keys(patrons).includes(tiers[i])) continue;
       for (let j = 0; j < patrons[tiers[i]].length; j++) {
         let patron = patrons[tiers[i]][j];
         if (patron.abbr === webConfig.abbr && patron.uid === user.uid) {
@@ -540,7 +541,7 @@ const UserCard = props => {
         if (userLevel >= 3) {
           setProfileBannerURL(uc.profile_banner_url);
         }
-      } catch {}
+      } catch { }
     }
     if (newSpecialColor === "/") newSpecialColor = "";
     setSpecialColor(newSpecialColor);

@@ -165,6 +165,7 @@ const Settings = ({ defaultTab = 0 }) => {
     const connectedCHubAccount = useMemo(() => {
         let tiers = ["platinum", "gold", "silver", "bronze"];
         for (let k = 0; k < 4; k++) {
+            if (!Object.keys(patrons).includes(tiers[k])) continue;
             for (let i = 0; i < patrons[tiers[k]].length; i++) {
                 if (patrons[tiers[k]][i].abbr === webConfig.abbr && patrons[tiers[k]][i].uid === curUser.uid && !patrons[tiers[k]][i].patreon_id) {
                     return "OK";
@@ -1147,6 +1148,7 @@ const Settings = ({ defaultTab = 0 }) => {
 
         let tiers = ["platinum", "gold", "silver", "bronze"];
         for (let i = 0; i < tiers.length; i++) {
+            if (!Object.keys(patrons).includes(tiers[i])) continue;
             for (let j = 0; j < patrons[tiers[i]].length; j++) {
                 let patron = patrons[tiers[i]][j];
                 if (patron.abbr === webConfig.abbr && patron.uid === curUser.uid) {

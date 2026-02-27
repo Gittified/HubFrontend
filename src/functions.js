@@ -146,8 +146,8 @@ export const makeRequestsAuto = async urls => {
                     headers:
                         auth === true || (auth === "prefer" && getAuthToken() !== null)
                             ? {
-                                  Authorization: `Bearer ${getAuthToken()}`,
-                              }
+                                Authorization: `Bearer ${getAuthToken()}`,
+                            }
                             : null,
                 });
             } else {
@@ -251,6 +251,7 @@ export async function FetchProfile({ apiPath, specialUsers, patrons, setUserLeve
             let tiers = ["platinum", "gold", "silver", "bronze"];
             for (let i = 0; i < tiers.length; i++) {
                 if (userLevel !== -1) break;
+                if (!Object.keys(patrons).includes(tiers[i])) continue;
                 for (let j = 0; j < patrons[tiers[i]].length; j++) {
                     let patron = patrons[tiers[i]][j];
                     if (patron.abbr === webConfig.abbr && patron.uid === curUser.uid) {
