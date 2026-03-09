@@ -29,6 +29,7 @@ const Supporters = () => {
     let group = [];
     for (let i = 0; i < tiers.length; i++) {
         group = [];
+        if (!Object.keys(patrons).includes(tiers[i])) continue;
         for (let j = 0; j < patrons[tiers[i]].length; j++) {
             group.push({ name: patrons[tiers[i]][j].name, avatar: patrons[tiers[i]][j].avatar });
         }
